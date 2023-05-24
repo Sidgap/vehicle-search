@@ -10,4 +10,6 @@ public interface ManufacturerService  {
 
 	List<Manufacturer> getAllManufacturer();
 
+	Manufacturer getManufacturerbyid(Integer id);
+
 }
