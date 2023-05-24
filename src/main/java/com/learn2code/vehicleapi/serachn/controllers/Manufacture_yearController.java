@@ -1,8 +1,11 @@
 package com.learn2code.vehicleapi.serachn.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +28,11 @@ public class Manufacture_yearController {
 		return new ResponseEntity<Manufacture_year>(savedmanufacture_year,HttpStatus.CREATED);
 	}
 	
+	@GetMapping("/getall")
+	public ResponseEntity<List<Manufacture_year>> getAllManufactureYear()
+	{
+		List<Manufacture_year> allmanufacture_year=manufacture_yearservice.getAllManufactureYear();
+		return new ResponseEntity<List<Manufacture_year>>(allmanufacture_year,HttpStatus.OK);
+	}
 
 }
