@@ -27,4 +27,10 @@ public class Manufacture_yearServiceimpl implements Manufacture_yearService {
 		return dballmanufacture_year;
 	}
 
+	@Override
+	public Manufacture_year getManufactureyearbyid(Integer id) {
+		Manufacture_year dbsinglemanufactureyear=manufacture_yeardao.findById(id).get();
+		return dbsinglemanufactureyear;
+	}
+
 }

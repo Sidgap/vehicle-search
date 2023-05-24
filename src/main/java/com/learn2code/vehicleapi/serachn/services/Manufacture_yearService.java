@@ -10,4 +10,6 @@ public interface Manufacture_yearService {
 
 	List<Manufacture_year> getAllManufactureYear();
 
+	Manufacture_year getManufactureyearbyid(Integer id);
+
 }

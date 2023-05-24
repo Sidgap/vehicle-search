@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,4 +36,11 @@ public class Manufacture_yearController {
 		return new ResponseEntity<List<Manufacture_year>>(allmanufacture_year,HttpStatus.OK);
 	}
 
+	@GetMapping("/get/{id}")
+	public ResponseEntity<Manufacture_year> getManufactureyearbyid(@PathVariable Integer id)
+	{
+		Manufacture_year singlemanufactureyear=manufacture_yearservice.getManufactureyearbyid(id);
+		return new ResponseEntity<Manufacture_year>(singlemanufactureyear,HttpStatus.OK);
+	}
+	
 }

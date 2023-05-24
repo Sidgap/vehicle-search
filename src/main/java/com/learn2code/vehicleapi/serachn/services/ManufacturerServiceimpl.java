@@ -25,6 +25,12 @@ public class ManufacturerServiceimpl implements ManufacturerService {
 		List<Manufacturer> dballmanufacturer=ManufacturerDao.findAll();
 		return dballmanufacturer;
 	}
+
+	@Override
+	public Manufacturer getManufacturerbyid(Integer id) {
+		Manufacturer dbsinglemanufacturer=ManufacturerDao.findById(id).get();
+		return dbsinglemanufacturer;
+	}
 	
 
 }
