@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.learn2code.vehicleapi.serachn.Dao.ManufacturerDao;
 import com.learn2code.vehicleapi.serachn.Entity.Manufacturer;
+import com.learn2code.vehicleapi.serachn.Exceptions.ManufacturerNotFoundException;
 
 @Service
 public class ManufacturerServiceimpl implements ManufacturerService {
@@ -28,7 +29,7 @@ public class ManufacturerServiceimpl implements ManufacturerService {
 
 	@Override
 	public Manufacturer getManufacturerbyid(Integer id) {
-		Manufacturer dbsinglemanufacturer=ManufacturerDao.findById(id).get();
+		Manufacturer dbsinglemanufacturer=ManufacturerDao.findById(id).orElseThrow(() -> new ManufacturerNotFoundException("Manufacturer not found with id " +id));;
 		return dbsinglemanufacturer;
 	}
 	

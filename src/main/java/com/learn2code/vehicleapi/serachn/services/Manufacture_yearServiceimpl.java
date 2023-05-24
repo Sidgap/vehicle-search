@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.learn2code.vehicleapi.serachn.Dao.ManufactureYearDao;
 import com.learn2code.vehicleapi.serachn.Entity.Manufacture_year;
+import com.learn2code.vehicleapi.serachn.Exceptions.ManuFactureYearNotFoundException;
+
+
 
 @Service
 public class Manufacture_yearServiceimpl implements Manufacture_yearService {
@@ -29,7 +32,7 @@ public class Manufacture_yearServiceimpl implements Manufacture_yearService {
 
 	@Override
 	public Manufacture_year getManufactureyearbyid(Integer id) {
-		Manufacture_year dbsinglemanufactureyear=manufacture_yeardao.findById(id).get();
+		Manufacture_year dbsinglemanufactureyear=manufacture_yeardao.findById(id).orElseThrow(() -> new ManuFactureYearNotFoundException("ManufacturerYear not found with id " +id));
 		return dbsinglemanufactureyear;
 	}
 
