@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -76,5 +77,15 @@ public class ManufacturerController {
              throw new RuntimeException(ex.getMessage(), ex);
          }
     }
+	
+	 @DeleteMapping("/{id}")
+     public ResponseEntity<String> deleteManufacturer(@PathVariable Integer id) {
+         try {
+        	 manufacturerService.deleteManufacturer(id);
+             return new ResponseEntity<>("Manufacturer deleleted with id :"+id,HttpStatus.OK);
+         } catch (ManufacturerNotFoundException ex) {
+             throw new RuntimeException(ex.getMessage(), ex);
+         }
+     }
 }
 	

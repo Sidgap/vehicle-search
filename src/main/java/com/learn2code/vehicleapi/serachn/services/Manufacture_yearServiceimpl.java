@@ -44,4 +44,11 @@ public class Manufacture_yearServiceimpl implements Manufacture_yearService {
         return updatedManufactureyear;
 	}
 
+	@Override
+	public void deleteManufactureyear(Integer id) {
+		Manufacture_year manufactureyear = manufacture_yeardao.findById(id).orElseThrow(() -> new ManuFactureYearNotFoundException("Manufactureyear not found with id " +id));
+		manufacture_yeardao.delete(manufactureyear);
+		
+	}
+
 }
