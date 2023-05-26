@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="manufacturer")
@@ -15,9 +16,12 @@ public class Manufacturer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@Column(name="manufacurer_name")
+	@NotBlank(message="* Manufacturername cannot be blank")
 	private String manufacturer_name;
 	@Column(name="country")
+	
 	private String country;
 	
 	public Manufacturer(Integer id, String manufacturer_name, String country) {

@@ -8,11 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learn2code.vehicleapi.serachn.Entity.Manufacture_year;
+import com.learn2code.vehicleapi.serachn.Exceptions.ManuFactureYearNotFoundException;
 import com.learn2code.vehicleapi.serachn.services.Manufacture_yearService;
 
 @RestController
@@ -39,8 +41,26 @@ public class Manufacture_yearController {
 	@GetMapping("/get/{id}")
 	public ResponseEntity<Manufacture_year> getManufactureyearbyid(@PathVariable Integer id)
 	{
-		Manufacture_year singlemanufactureyear=manufacture_yearservice.getManufactureyearbyid(id);
-		return new ResponseEntity<Manufacture_year>(singlemanufactureyear,HttpStatus.OK);
+
+	      try { 
+	    	  Manufacture_year singlemanufactureyear=manufacture_yearservice.getManufactureyearbyid(id);
+          return new ResponseEntity<>(singlemanufactureyear, HttpStatus.OK);
+          
+      } catch (ManuFactureYearNotFoundException ex) {
+          throw new RuntimeException(ex.getMessage(), ex);
+      }
 	}
 	
+	@PutMapping("/{id}")
+	public ResponseEntity<Manufacture_year> updateManufactureYear(@RequestBody Manufacture_year manufactureyear,@PathVariable Integer id)
+	{
+	try {
+      	  
+			Manufacture_year updatemanufactureyear=manufacture_yearservice.updateManufactureYear(manufactureyear,id);
+            return new ResponseEntity<>(updatemanufactureyear, HttpStatus.OK);
+       } catch (ManuFactureYearNotFoundException ex) {
+            throw new RuntimeException(ex.getMessage(), ex);
+        }
+	
+    }
 }

@@ -12,4 +12,8 @@ public interface Manufacture_yearService {
 
 	Manufacture_year getManufactureyearbyid(Integer id);
 
+	Manufacture_year updateManufactureYear(Manufacture_year manufactureyear, Integer id);
+
+	
+
 }
