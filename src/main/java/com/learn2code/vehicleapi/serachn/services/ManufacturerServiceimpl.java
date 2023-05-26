@@ -11,6 +11,7 @@ import com.learn2code.vehicleapi.serachn.Entity.Manufacturer;
 import com.learn2code.vehicleapi.serachn.Exceptions.ManufacturerNotFoundException;
 
 
+
 @Service
 public class ManufacturerServiceimpl implements ManufacturerService {
 
@@ -54,4 +55,11 @@ public class ManufacturerServiceimpl implements ManufacturerService {
 	   
      
       }
+
+	@Override
+	public void deleteManufacturer(Integer id) {
+		Manufacturer manufacturer = ManufacturerDao.findById(id).orElseThrow(() -> new ManufacturerNotFoundException("Manufacturer not found with id " +id));
+		ManufacturerDao.delete(manufacturer);
+		
+	}
 }

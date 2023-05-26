@@ -14,6 +14,8 @@ public interface Manufacture_yearService {
 
 	Manufacture_year updateManufactureYear(Manufacture_year manufactureyear, Integer id);
 
+	void deleteManufactureyear(Integer id);
+
 	
 
 }
