@@ -2,6 +2,8 @@ package com.learn2code.vehicleapi.serachn.services;
 
 import java.util.List;
 
+
+
 import com.learn2code.vehicleapi.serachn.Entity.Manufacturer;
 
 public interface ManufacturerService  {
@@ -11,5 +13,9 @@ public interface ManufacturerService  {
 	List<Manufacturer> getAllManufacturer();
 
 	Manufacturer getManufacturerbyid(Integer id);
+
+	Manufacturer updateManufacturer(Integer id,Manufacturer manufacturer);
+
+	
 
 }

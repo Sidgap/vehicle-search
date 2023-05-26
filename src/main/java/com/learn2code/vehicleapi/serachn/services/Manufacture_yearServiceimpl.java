@@ -36,4 +36,12 @@ public class Manufacture_yearServiceimpl implements Manufacture_yearService {
 		return dbsinglemanufactureyear;
 	}
 
+	@Override
+	public Manufacture_year updateManufactureYear(Manufacture_year manufactureyear, Integer id) {
+		Manufacture_year oldmanufactureyear = manufacture_yeardao.findById(id).orElseThrow(() -> new ManuFactureYearNotFoundException("Manufactureryear not found with id " +id));
+		oldmanufactureyear.setYear(manufactureyear.getYear());
+		Manufacture_year updatedManufactureyear = manufacture_yeardao.save(oldmanufactureyear);
+        return updatedManufactureyear;
+	}
+
 }
