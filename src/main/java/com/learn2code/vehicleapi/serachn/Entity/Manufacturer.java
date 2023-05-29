@@ -1,17 +1,21 @@
 package com.learn2code.vehicleapi.serachn.Entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="manufacturer")
 public class Manufacturer {
-	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +28,18 @@ public class Manufacturer {
 	
 	private String country;
 	
-	public Manufacturer(Integer id, String manufacturer_name, String country) {
-		super();
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "owner_id")
+	@JsonBackReference
+	private OwnerCompany owner;
+	
+	
+	public Manufacturer(Integer id, String manufacturer_name,String country, OwnerCompany owner) {
+			
 		this.id = id;
 		this.manufacturer_name = manufacturer_name;
 		this.country = country;
+		this.owner = owner;
 	}
 
 	public Manufacturer() {
@@ -58,9 +69,13 @@ public class Manufacturer {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
-	
-	
-	
 
+	public OwnerCompany getOwner() {
+		return owner;
+	}
+
+	public void setOwner(OwnerCompany owner) {
+		this.owner = owner;
+	}
+	
 }
