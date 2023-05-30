@@ -1,12 +1,16 @@
 package com.learn2code.vehicleapi.serachn.Entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -34,12 +38,18 @@ public class Manufacturer {
 	private OwnerCompany owner;
 	
 	
-	public Manufacturer(Integer id, String manufacturer_name,String country, OwnerCompany owner) {
+	@OneToMany(cascade = CascadeType.ALL,fetch= FetchType.LAZY)
+	@JoinColumn(name="product_id")
+	private List<Product> products;
+	
+	
+	public Manufacturer(Integer id, String manufacturer_name,String country, OwnerCompany owner, List<Product> products) {
 			
 		this.id = id;
 		this.manufacturer_name = manufacturer_name;
 		this.country = country;
 		this.owner = owner;
+		this.products = products;
 	}
 
 	public Manufacturer() {
@@ -77,5 +87,15 @@ public class Manufacturer {
 	public void setOwner(OwnerCompany owner) {
 		this.owner = owner;
 	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	
+	
 	
 }
