@@ -39,7 +39,7 @@ public class Manufacturer {
 	
 	
 	@OneToMany(cascade = CascadeType.ALL,fetch= FetchType.LAZY)
-	@JoinColumn(name="product_id")
+	@JoinColumn(name="manufacturer_id")
 	private List<Product> products;
 	
 	

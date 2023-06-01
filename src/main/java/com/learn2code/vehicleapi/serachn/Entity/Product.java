@@ -1,11 +1,17 @@
 package com.learn2code.vehicleapi.serachn.Entity;
 
+import java.util.List;
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="Products")
@@ -18,11 +24,18 @@ public class Product {
 	@Column(name="productname")
 	private String productname;
 
-	public Product(Integer id, String productname) {
+	@OneToMany(mappedBy = "product")
+	@JsonManagedReference
+	private List<Review> reviews;
+	
+	public Product(Integer id, String productname,List<Review> reviews) {
 		super();
 		this.id = id;
 		this.productname = productname;
+		this.reviews=reviews;
 	}
+	
+	
 
 	public Product() {
 		
@@ -43,6 +56,22 @@ public class Product {
 	public void setProductname(String productname) {
 		this.productname = productname;
 	}
+
+
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+	
+
+
+
+	
 	
 	
 	
