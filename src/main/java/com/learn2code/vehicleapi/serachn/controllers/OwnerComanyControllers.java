@@ -21,7 +21,7 @@ import com.learn2code.vehicleapi.serachn.Exceptions.OwnerComanyNotfoundException
 import com.learn2code.vehicleapi.serachn.services.OwnerCompanyService;
 
 @RestController
-@RequestMapping("/api/v1/ownercomany")
+@RequestMapping("/api/v1/ownercompany")
 public class OwnerComanyControllers {
 
 	@Autowired
