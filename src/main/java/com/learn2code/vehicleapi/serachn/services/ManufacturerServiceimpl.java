@@ -31,14 +31,14 @@ public class ManufacturerServiceimpl implements ManufacturerService {
 	}
 
 	@Override
-	public Manufacturer getManufacturerbyid(Integer id) {
-		Manufacturer dbsinglemanufacturer=ManufacturerDao.findById(id).orElseThrow(() -> new ManufacturerNotFoundException("Manufacturer not found with id " +id));
+	public Manufacturer getManufacturerbyid(Integer manufacturerId) {
+		Manufacturer dbsinglemanufacturer=ManufacturerDao.findById(manufacturerId).orElseThrow(() -> new ManufacturerNotFoundException("Manufacturer not found with id " +manufacturerId));
 		return dbsinglemanufacturer;
 	}
 
 	@Override
-	public Manufacturer updateManufacturer(Integer id,Manufacturer manufacturer ) {
-		Manufacturer oldmanufacturer = ManufacturerDao.findById(id).orElseThrow(() -> new ManufacturerNotFoundException("Manufacturer not found with id " +id));
+	public Manufacturer updateManufacturer(Integer manufacturerId,Manufacturer manufacturer ) {
+		Manufacturer oldmanufacturer = ManufacturerDao.findById(manufacturerId).orElseThrow(() -> new ManufacturerNotFoundException("Manufacturer not found with id " +manufacturerId));
 		if(oldmanufacturer!=null&&Objects.nonNull(manufacturer))
 		{
 			if(Objects.nonNull(manufacturer.getManufacturer_name())&&!"".equalsIgnoreCase(manufacturer.getManufacturer_name()))
@@ -57,8 +57,8 @@ public class ManufacturerServiceimpl implements ManufacturerService {
       }
 
 	@Override
-	public void deleteManufacturer(Integer id) {
-		Manufacturer manufacturer = ManufacturerDao.findById(id).orElseThrow(() -> new ManufacturerNotFoundException("Manufacturer not found with id " +id));
+	public void deleteManufacturer(Integer manufacturerId) {
+		Manufacturer manufacturer = ManufacturerDao.findById(manufacturerId).orElseThrow(() -> new ManufacturerNotFoundException("Manufacturer not found with id " +manufacturerId));
 		ManufacturerDao.delete(manufacturer);
 		
 	}

@@ -47,13 +47,13 @@ public class ManufacturerController {
 		return new ResponseEntity<List<Manufacturer>>(allmanufacturers,HttpStatus.OK);
 	}
 	
-	@GetMapping("/get/{id}")
-	public ResponseEntity<Manufacturer> getManufacturerbyid(@PathVariable Integer id) 
+	@GetMapping("/get/{manufacturerId}")
+	public ResponseEntity<Manufacturer> getManufacturerbyid(@PathVariable Integer manufacturerId) 
 	{
 		
 		
 	      try { 
-			Manufacturer singlemanufacturer=manufacturerService.getManufacturerbyid(id);
+			Manufacturer singlemanufacturer=manufacturerService.getManufacturerbyid(manufacturerId);
             return new ResponseEntity<>(singlemanufacturer, HttpStatus.OK);
             
         } catch (ManufacturerNotFoundException ex) {
@@ -61,8 +61,8 @@ public class ManufacturerController {
         }
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<?> updateManufacturer(@PathVariable Integer id,@Valid @RequestBody Manufacturer manufacturer,BindingResult bindingResult) 
+	@PutMapping("/{manufacturerId}")
+	public ResponseEntity<?> updateManufacturer(@PathVariable Integer manufacturerId,@Valid @RequestBody Manufacturer manufacturer,BindingResult bindingResult) 
 	{
 		if (bindingResult.hasErrors()) {
             List<ObjectError> errors = bindingResult.getAllErrors();
@@ -71,18 +71,18 @@ public class ManufacturerController {
         }
 		 try {
        	  
-			 Manufacturer updatedmanufacturer = manufacturerService.updateManufacturer( id,manufacturer);
+			 Manufacturer updatedmanufacturer = manufacturerService.updateManufacturer( manufacturerId,manufacturer);
              return new ResponseEntity<>(updatedmanufacturer, HttpStatus.OK);
          } catch (ManufacturerNotFoundException ex) {
              throw new RuntimeException(ex.getMessage(), ex);
          }
     }
 	
-	 @DeleteMapping("/{id}")
-     public ResponseEntity<String> deleteManufacturer(@PathVariable Integer id) {
+	 @DeleteMapping("/{manufacturerId}")
+     public ResponseEntity<String> deleteManufacturer(@PathVariable Integer manufacturerId) {
          try {
-        	 manufacturerService.deleteManufacturer(id);
-             return new ResponseEntity<>("Manufacturer deleleted with id :"+id,HttpStatus.OK);
+        	 manufacturerService.deleteManufacturer(manufacturerId);
+             return new ResponseEntity<>("Manufacturer deleleted with id :"+manufacturerId,HttpStatus.OK);
          } catch (ManufacturerNotFoundException ex) {
              throw new RuntimeException(ex.getMessage(), ex);
          }

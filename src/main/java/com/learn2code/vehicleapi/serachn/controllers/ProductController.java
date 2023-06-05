@@ -39,13 +39,13 @@ public class ProductController {
 		return new ResponseEntity<List<Product>>(allproducts,HttpStatus.OK);
 	}
 	
-	@GetMapping("/get/{id}")
-	public ResponseEntity<Product> getProductbyid(@PathVariable Integer id) 
+	@GetMapping("/get/{productId}")
+	public ResponseEntity<Product> getProductbyid(@PathVariable Integer productId) 
 	{
 		
 		
 	      try { 
-	    	  Product singleproduct=productService.getProductbyid(id);
+	    	  Product singleproduct=productService.getProductbyid(productId);
             return new ResponseEntity<>(singleproduct, HttpStatus.OK);
             
         } catch (ProductNotFoundException ex) {
@@ -53,12 +53,12 @@ public class ProductController {
         }
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Product> updateProduct(@RequestBody Product product,@PathVariable Integer id)
+	@PutMapping("/{productId}")
+	public ResponseEntity<Product> updateProduct(@RequestBody Product product,@PathVariable Integer productId)
 	{
 	try {
       	  
-		Product updateproduct=productService.updateProduct(product,id);
+		Product updateproduct=productService.updateProduct(product,productId);
 		 return new ResponseEntity<>(updateproduct, HttpStatus.OK);
          
        } catch (ProductNotFoundException ex) {
@@ -67,14 +67,16 @@ public class ProductController {
 	
     }
 	
-	 @DeleteMapping("/{id}")
-     public ResponseEntity<String> deleteProduct(@PathVariable Integer id) {
+	 @DeleteMapping("/{productId}")
+     public ResponseEntity<String> deleteProduct(@PathVariable Integer productId) {
          try {
-        	 productService.deleteProduct(id);
-             return new ResponseEntity<>("Product deleleted with id :"+id,HttpStatus.OK);
+        	 productService.deleteProduct(productId);
+             return new ResponseEntity<>("Product deleleted with id :"+productId,HttpStatus.OK);
          } catch (ProductNotFoundException ex) {
              throw new RuntimeException(ex.getMessage(), ex);
          }
      }
+	 
+	 
 
 }

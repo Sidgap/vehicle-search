@@ -31,22 +31,22 @@ public class TrimTypeServiceimpl implements TrimTypeService {
 	}
 
 	@Override
-	public Trimtype gettrimtypebyid(Integer id) {
-		Trimtype dbsingletrimtype=TrimTypeDao.findById(id).orElseThrow(() -> new TrimTypeNotFoundException("TrimType not found with id " +id));
+	public Trimtype gettrimtypebyid(Integer trimtypeId) {
+		Trimtype dbsingletrimtype=TrimTypeDao.findById(trimtypeId).orElseThrow(() -> new TrimTypeNotFoundException("TrimType not found with id " +trimtypeId));
 		return dbsingletrimtype;
 	}
 
 	@Override
-	public Trimtype updatetrimtype(Integer id, @Valid Trimtype trimtype) {
-		Trimtype oldtrimtype = TrimTypeDao.findById(id).orElseThrow(() -> new TrimTypeNotFoundException("TrimType not found with id " +id));
+	public Trimtype updatetrimtype(Integer trimtypeId, @Valid Trimtype trimtype) {
+		Trimtype oldtrimtype = TrimTypeDao.findById(trimtypeId).orElseThrow(() -> new TrimTypeNotFoundException("TrimType not found with id " +trimtypeId));
 		oldtrimtype.setTrimtype(trimtype.getTrimtype());
 		Trimtype updatedTrimtype = TrimTypeDao.save(oldtrimtype);
         return updatedTrimtype;
 	}
 
 	@Override
-	public void deletetrimtype(Integer id) {
-		Trimtype trimtype = TrimTypeDao.findById(id).orElseThrow(() -> new TrimTypeNotFoundException("TrimType not found with id " +id));
+	public void deletetrimtype(Integer trimtypeId) {
+		Trimtype trimtype = TrimTypeDao.findById(trimtypeId).orElseThrow(() -> new TrimTypeNotFoundException("TrimType not found with id " +trimtypeId));
 		TrimTypeDao.delete(trimtype);
 	}
 

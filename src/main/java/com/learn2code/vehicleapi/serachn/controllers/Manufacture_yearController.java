@@ -39,12 +39,12 @@ public class Manufacture_yearController {
 		return new ResponseEntity<List<Manufacture_year>>(allmanufacture_year,HttpStatus.OK);
 	}
 
-	@GetMapping("/get/{id}")
-	public ResponseEntity<Manufacture_year> getManufactureyearbyid(@PathVariable Integer id)
+	@GetMapping("/get/{manufactureryearId}")
+	public ResponseEntity<Manufacture_year> getManufactureyearbyid(@PathVariable Integer manufactureryearId)
 	{
 
 	      try { 
-	    	  Manufacture_year singlemanufactureyear=manufacture_yearservice.getManufactureyearbyid(id);
+	    	  Manufacture_year singlemanufactureyear=manufacture_yearservice.getManufactureyearbyid(manufactureryearId);
           return new ResponseEntity<>(singlemanufactureyear, HttpStatus.OK);
           
       } catch (ManuFactureYearNotFoundException ex) {
@@ -52,12 +52,12 @@ public class Manufacture_yearController {
       }
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Manufacture_year> updateManufactureYear(@RequestBody Manufacture_year manufactureyear,@PathVariable Integer id)
+	@PutMapping("/{manufactureryearId}")
+	public ResponseEntity<Manufacture_year> updateManufactureYear(@RequestBody Manufacture_year manufactureyear,@PathVariable Integer manufactureryearId)
 	{
 	try {
       	  
-			Manufacture_year updatemanufactureyear=manufacture_yearservice.updateManufactureYear(manufactureyear,id);
+			Manufacture_year updatemanufactureyear=manufacture_yearservice.updateManufactureYear(manufactureyear,manufactureryearId);
             return new ResponseEntity<>(updatemanufactureyear, HttpStatus.OK);
        } catch (ManuFactureYearNotFoundException ex) {
             throw new RuntimeException(ex.getMessage(), ex);
@@ -65,11 +65,11 @@ public class Manufacture_yearController {
 	
     }
 	
-	 @DeleteMapping("/{id}")
-     public ResponseEntity<String> deleteManufactureyear(@PathVariable Integer id) {
+	 @DeleteMapping("/{manufactureryearId}")
+     public ResponseEntity<String> deleteManufactureyear(@PathVariable Integer manufactureryearId) {
          try {
-        	 manufacture_yearservice.deleteManufactureyear(id);
-             return new ResponseEntity<>("Manufactureyear deleleted with id :"+id,HttpStatus.OK);
+        	 manufacture_yearservice.deleteManufactureyear(manufactureryearId);
+             return new ResponseEntity<>("Manufactureyear deleleted with id :"+manufactureryearId,HttpStatus.OK);
          } catch (ManuFactureYearNotFoundException ex) {
              throw new RuntimeException(ex.getMessage(), ex);
          }

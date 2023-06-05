@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learn2code.vehicleapi.serachn.Dao.ReviewDao;
+import com.learn2code.vehicleapi.serachn.Entity.Product;
 import com.learn2code.vehicleapi.serachn.Entity.Review;
 import com.learn2code.vehicleapi.serachn.Exceptions.ReviewNotFoundException;
 
@@ -15,6 +16,9 @@ public class ReviewServiceimpl implements ReviewService {
 	@Autowired
 	private ReviewDao ReviewDao;
 
+	@Autowired
+	private ProductService productService;
+	
 	@Override
 	public Review saveReview(Review review) {
 		Review dbreviewr=ReviewDao.save(review);
@@ -28,23 +32,45 @@ public class ReviewServiceimpl implements ReviewService {
 	}
 
 	@Override
-	public Review getReviewByid(Integer id) {
-		Review dbsinglereview=ReviewDao.findById(id).orElseThrow(() -> new ReviewNotFoundException("Review not found with id " +id));
+	public Review getReviewByid(Integer reviewId) {
+		Review dbsinglereview=ReviewDao.findById(reviewId).orElseThrow(() -> new ReviewNotFoundException("Review not found with id " +reviewId));
 		return dbsinglereview;
 	}
 
 	@Override
-	public Review updateReview(Review review, Integer id) {
-		Review oldreview = ReviewDao.findById(id).orElseThrow(() -> new ReviewNotFoundException("Review not found with id " +id));
+	public Review updateReview(Review review, Integer reviewId) {
+		Review oldreview = ReviewDao.findById(reviewId).orElseThrow(() -> new ReviewNotFoundException("Review not found with id " +reviewId));
 		oldreview.setReview(review.getReview());
 		Review updatedReview = ReviewDao.save(oldreview);
         return updatedReview;
 	}
 
 	@Override
-	public void deleteReview(Integer id) {
-		Review review = ReviewDao.findById(id).orElseThrow(() -> new ReviewNotFoundException("Review not found with id " +id));
+	public void deleteReview(Integer reviewId) {
+		Review review = ReviewDao.findById(reviewId).orElseThrow(() -> new ReviewNotFoundException("Review not found with id " +reviewId));
 		ReviewDao.delete(review);
 	}
+
+	@Override
+	public List<Review> getReviewsByProductName(String productname) {
+		List<Review> reviews=ReviewDao.findByProduct_productname(productname);
+		return reviews;
+	}
+
+	@Override
+	public List<Review> getReviewsByProduct(Integer id) {
+		 Product product = productService.getProductbyid(id);
+		 List<Review> reviews=ReviewDao.findByProduct(product);
+		 return reviews;
+	}
+
+	
+
+	
+
+	
+
+	
+	
 
 }

@@ -42,12 +42,12 @@ public class TrimTypeController {//Trimtype,trimtype
 		return new ResponseEntity<List<Trimtype>>(alltrimtypes,HttpStatus.OK);
 	}
 	
-	@GetMapping("/get/{id}")
-	public ResponseEntity<Trimtype> gettrimtypebyid(@PathVariable Integer id) 
+	@GetMapping("/get/{trimtypeId}")
+	public ResponseEntity<Trimtype> gettrimtypebyid(@PathVariable Integer trimtypeId) 
 	{
 		
 	      try { 
-	    	  Trimtype singletrimtype=trimtypeService.gettrimtypebyid(id);
+	    	  Trimtype singletrimtype=trimtypeService.gettrimtypebyid(trimtypeId);
             return new ResponseEntity<>(singletrimtype, HttpStatus.OK);
             
         } catch (TrimTypeNotFoundException ex) {
@@ -55,24 +55,24 @@ public class TrimTypeController {//Trimtype,trimtype
         }
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Trimtype> updatetrimtype(@PathVariable Integer id,@Valid @RequestBody Trimtype trimtype) 
+	@PutMapping("/{trimtypeId}")
+	public ResponseEntity<Trimtype> updatetrimtype(@PathVariable Integer trimtypeId,@Valid @RequestBody Trimtype trimtype) 
 	{
 		
 		 try {
        	  
-			 Trimtype updatedtrimtype = trimtypeService.updatetrimtype( id,trimtype);
+			 Trimtype updatedtrimtype = trimtypeService.updatetrimtype( trimtypeId,trimtype);
              return new ResponseEntity<>(updatedtrimtype, HttpStatus.OK);
          } catch (TrimTypeNotFoundException ex) {
              throw new RuntimeException(ex.getMessage(), ex);
          }
     }
 	
-	 @DeleteMapping("/{id}")
-     public ResponseEntity<String> deletetrimtype(@PathVariable Integer id) {
+	 @DeleteMapping("/{trimtypeId}")
+     public ResponseEntity<String> deletetrimtype(@PathVariable Integer trimtypeId) {
          try {
-        	 trimtypeService.deletetrimtype(id);
-             return new ResponseEntity<>("TrimType deleleted with id :"+id,HttpStatus.OK);
+        	 trimtypeService.deletetrimtype(trimtypeId);
+             return new ResponseEntity<>("TrimType deleleted with id :"+trimtypeId,HttpStatus.OK);
          } catch (TrimTypeNotFoundException ex) {
              throw new RuntimeException(ex.getMessage(), ex);
          }

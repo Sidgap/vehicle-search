@@ -10,10 +10,12 @@ public interface ProductService {
 
 	List<Product> getAllProducts();
 
-	Product getProductbyid(Integer id);
+	Product getProductbyid(Integer productId);
 
-	Product updateProduct(Product product, Integer id);
+	Product updateProduct(Product product, Integer productId);
 
-	void deleteProduct(Integer id);
+	void deleteProduct(Integer productId);
+
+	
 
 }

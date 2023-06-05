@@ -30,14 +30,14 @@ public class ModelServiceimpl implements ModelService {
 	}
 
 	@Override
-	public Model getModelbyid(Integer id) {
-		Model dbsinglemodel=modelDao.findById(id).orElseThrow(() -> new ModelNotFoundException("Model not found with id " +id));
+	public Model getModelbyid(Integer modelId) {
+		Model dbsinglemodel=modelDao.findById(modelId).orElseThrow(() -> new ModelNotFoundException("Model not found with id " +modelId));
 		return dbsinglemodel;
 	}
 
 	@Override
-	public Model updateModel(Integer id,Model model ) {
-		Model oldmodel = modelDao.findById(id).orElseThrow(() -> new ModelNotFoundException("Model not found with id " +id));
+	public Model updateModel(Integer modelId,Model model ) {
+		Model oldmodel = modelDao.findById(modelId).orElseThrow(() -> new ModelNotFoundException("Model not found with id " +modelId));
 		oldmodel.setModelname(model.getModelname());
 		Model updatedModel = modelDao.save(oldmodel);
         return updatedModel;
@@ -46,9 +46,15 @@ public class ModelServiceimpl implements ModelService {
       }
 
 	@Override
-	public void deleteModel(Integer id) {
-		Model model = modelDao.findById(id).orElseThrow(() -> new ModelNotFoundException("Model not found with id " +id));
+	public void deleteModel(Integer modelId) {
+		Model model = modelDao.findById(modelId).orElseThrow(() -> new ModelNotFoundException("Model not found with id " +modelId));
 		modelDao.delete(model);
 		
+	}
+
+	@Override
+	public List<Model> getModelsByModelName(String modelname) {
+		List<Model> models=modelDao.findBymodelname(modelname);
+		return models;
 	}
 }

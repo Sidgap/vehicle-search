@@ -28,14 +28,14 @@ public class OwnerComanyServiceimpl implements OwnerCompanyService {
 	}
 
 	@Override
-	public OwnerCompany getOwnerCompanybyid(Integer id) {
-		OwnerCompany dbsingledownercompany=ownercompanydao.findById(id).orElseThrow(() -> new OwnerComanyNotfoundException("OwnerCompany not found with id " +id));
+	public OwnerCompany getOwnerCompanybyid(Integer ownerCompanyId) {
+		OwnerCompany dbsingledownercompany=ownercompanydao.findById(ownerCompanyId).orElseThrow(() -> new OwnerComanyNotfoundException("OwnerCompany not found with id " +ownerCompanyId));
 		return dbsingledownercompany;
 	}
 
 	@Override
-	public OwnerCompany updateOwnerCompany(OwnerCompany ownercompany, Integer id) {
-		OwnerCompany oldownercompany = ownercompanydao.findById(id).orElseThrow(() -> new OwnerComanyNotfoundException("OwnerCompany not found with id " +id));
+	public OwnerCompany updateOwnerCompany(OwnerCompany ownercompany, Integer ownerCompanyId) {
+		OwnerCompany oldownercompany = ownercompanydao.findById(ownerCompanyId).orElseThrow(() -> new OwnerComanyNotfoundException("OwnerCompany not found with id " +ownerCompanyId));
 		oldownercompany.setName(ownercompany.getName());
 		oldownercompany.setEmail(ownercompany.getEmail());
 		oldownercompany.setManufacturer(ownercompany.getManufacturer());
@@ -44,8 +44,8 @@ public class OwnerComanyServiceimpl implements OwnerCompanyService {
 	}
 
 	@Override
-	public void deleteOwnerCompany(Integer id) {
-		OwnerCompany ownercompany = ownercompanydao.findById(id).orElseThrow(() -> new OwnerComanyNotfoundException("OwnerCompany not found with id " +id));
+	public void deleteOwnerCompany(Integer ownerCompanyId) {
+		OwnerCompany ownercompany = ownercompanydao.findById(ownerCompanyId).orElseThrow(() -> new OwnerComanyNotfoundException("OwnerCompany not found with id " +ownerCompanyId));
 		ownercompanydao.delete(ownercompany);
 		
 	}
