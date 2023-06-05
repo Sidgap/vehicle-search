@@ -10,11 +10,11 @@ public interface Manufacture_yearService {
 
 	List<Manufacture_year> getAllManufactureYear();
 
-	Manufacture_year getManufactureyearbyid(Integer id);
+	Manufacture_year getManufactureyearbyid(Integer manufactureryearId);
 
-	Manufacture_year updateManufactureYear(Manufacture_year manufactureyear, Integer id);
+	Manufacture_year updateManufactureYear(Manufacture_year manufactureyear, Integer manufactureryearId);
 
-	void deleteManufactureyear(Integer id);
+	void deleteManufactureyear(Integer manufactureryearId);
 
 	
 

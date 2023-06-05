@@ -12,10 +12,10 @@ public interface TrimTypeService {
 
 	List<Trimtype> getAlltrimtypes();
 
-	Trimtype gettrimtypebyid(Integer id);
+	Trimtype gettrimtypebyid(Integer trimtypeId);
 
-	Trimtype updatetrimtype(Integer id, @Valid Trimtype trimtype);
+	Trimtype updatetrimtype(Integer trimtypeId, @Valid Trimtype trimtype);
 
-	void deletetrimtype(Integer id);
+	void deletetrimtype(Integer trimtypeId);
 
 }

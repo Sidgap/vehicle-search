@@ -28,23 +28,25 @@ public class ProductServiceimpl implements ProductService {
 	}
 
 	@Override
-	public Product getProductbyid(Integer id) {
-		Product dbsingleproduct=ProductDao.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found with id " +id));
+	public Product getProductbyid(Integer productId) {
+		Product dbsingleproduct=ProductDao.findById(productId).orElseThrow(() -> new ProductNotFoundException("Product not found with id " +productId));
 		return dbsingleproduct;
 	}
 
 	@Override
-	public Product updateProduct(Product product, Integer id) {
-		Product oldproduct = ProductDao.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found with id " +id));
+	public Product updateProduct(Product product, Integer productId) {
+		Product oldproduct = ProductDao.findById(productId).orElseThrow(() -> new ProductNotFoundException("Product not found with id " +productId));
 		oldproduct.setProductname(product.getProductname());
 		Product updatedProduct = ProductDao.save(oldproduct);
         return updatedProduct;
 	}
 
 	@Override
-	public void deleteProduct(Integer id) {
-		Product product = ProductDao.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found with id " +id));
+	public void deleteProduct(Integer productId) {
+		Product product = ProductDao.findById(productId).orElseThrow(() -> new ProductNotFoundException("Product not found with id " +productId));
 		ProductDao.delete(product);
 	}
+
+	
 
 }

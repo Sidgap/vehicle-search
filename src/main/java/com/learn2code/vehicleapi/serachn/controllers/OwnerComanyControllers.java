@@ -41,13 +41,13 @@ public class OwnerComanyControllers {
 		return new ResponseEntity<List<OwnerCompany>>(allownerCompanies,HttpStatus.OK);
 	}
 	
-	@GetMapping("/get/{id}")
-	public ResponseEntity<OwnerCompany> getOwnerCompanybyid(@PathVariable Integer id) 
+	@GetMapping("/get/{ownerCompanyId}")
+	public ResponseEntity<OwnerCompany> getOwnerCompanybyid(@PathVariable Integer ownerCompanyId) 
 	{
 		
 		
 	      try { 
-	    	  OwnerCompany singleownercompany=ownercompanyService.getOwnerCompanybyid(id);
+	    	  OwnerCompany singleownercompany=ownercompanyService.getOwnerCompanybyid(ownerCompanyId);
             return new ResponseEntity<>(singleownercompany, HttpStatus.OK);
             
         } catch (OwnerComanyNotfoundException ex) {
@@ -55,12 +55,12 @@ public class OwnerComanyControllers {
         }
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<OwnerCompany> updateOwnerCompany(@RequestBody OwnerCompany ownercompany,@PathVariable Integer id)
+	@PutMapping("/{ownerCompanyId}")
+	public ResponseEntity<OwnerCompany> updateOwnerCompany(@RequestBody OwnerCompany ownercompany,@PathVariable Integer ownerCompanyId)
 	{
 	try {
       	  
-		OwnerCompany updateownercompany=ownercompanyService.updateOwnerCompany(ownercompany,id);
+		OwnerCompany updateownercompany=ownercompanyService.updateOwnerCompany(ownercompany,ownerCompanyId);
             return new ResponseEntity<>(updateownercompany, HttpStatus.OK);
        } catch (OwnerComanyNotfoundException ex) {
             throw new RuntimeException(ex.getMessage(), ex);
@@ -68,11 +68,11 @@ public class OwnerComanyControllers {
 	
     }
 	
-	 @DeleteMapping("/{id}")
-     public ResponseEntity<String> deleteOwnerCompany(@PathVariable Integer id) {
+	 @DeleteMapping("/{ownerCompanyId}")
+     public ResponseEntity<String> deleteOwnerCompany(@PathVariable Integer ownerCompanyId) {
          try {
-        	 ownercompanyService.deleteOwnerCompany(id);
-             return new ResponseEntity<>("Ownercompany deleleted with id :"+id,HttpStatus.OK);
+        	 ownercompanyService.deleteOwnerCompany(ownerCompanyId);
+             return new ResponseEntity<>("Ownercompany deleleted with id :"+ownerCompanyId,HttpStatus.OK);
          } catch (OwnerComanyNotfoundException ex) {
              throw new RuntimeException(ex.getMessage(), ex);
          }

@@ -12,11 +12,11 @@ public interface ManufacturerService  {
 
 	List<Manufacturer> getAllManufacturer();
 
-	Manufacturer getManufacturerbyid(Integer id);
+	Manufacturer getManufacturerbyid(Integer manufacturerId);
 
-	Manufacturer updateManufacturer(Integer id,Manufacturer manufacturer);
+	Manufacturer updateManufacturer(Integer manufacturerId,Manufacturer manufacturer);
 
-	void deleteManufacturer(Integer id);
+	void deleteManufacturer(Integer manufacturerId);
 
 	
 

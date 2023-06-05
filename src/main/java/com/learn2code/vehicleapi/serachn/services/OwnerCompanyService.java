@@ -10,10 +10,10 @@ public interface OwnerCompanyService {
 
 	List<OwnerCompany> getAllOwnerCompanies();
 
-	OwnerCompany getOwnerCompanybyid(Integer id);
+	OwnerCompany getOwnerCompanybyid(Integer ownerCompanyId);
 
-	OwnerCompany updateOwnerCompany(OwnerCompany ownercompany, Integer id);
+	OwnerCompany updateOwnerCompany(OwnerCompany ownercompany, Integer ownerCompanyId);
 
-	void deleteOwnerCompany(Integer id);
+	void deleteOwnerCompany(Integer ownerCompanyId);
 
 }

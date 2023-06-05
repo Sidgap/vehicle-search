@@ -10,10 +10,16 @@ public interface ReviewService {
 
 	List<Review> getAllReviews();
 
-	Review getReviewByid(Integer id);
+	Review getReviewByid(Integer reviewId);
 
-	Review updateReview(Review review, Integer id);
+	Review updateReview(Review review, Integer reviewId);
 
-	void deleteReview(Integer id);
+	void deleteReview(Integer reviewId);
+
+	List<Review> getReviewsByProductName(String productname);
+
+	List<Review> getReviewsByProduct(Integer id);
+	
+	
 
 }

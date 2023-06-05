@@ -12,11 +12,15 @@ public interface ModelService  {
 
 	List<Model> getAllModels();
 
-	Model getModelbyid(Integer id);
+	Model getModelbyid(Integer modelId);
 
-	Model updateModel(Integer id, @Valid Model model);
+	Model updateModel(Integer modelId, @Valid Model model);
 
-	void deleteModel(Integer id);
+	void deleteModel(Integer modelId);
+
+	List<Model> getModelsByModelName(String modelname);
+	
+	
 
 	
 

@@ -40,12 +40,12 @@ public class ReviewController {
 		
 	}
 	
-	@GetMapping("/get/{id}")
-	public ResponseEntity<Review> getReviewByid(@PathVariable Integer id)
+	@GetMapping("/get/{reviewId}")
+	public ResponseEntity<Review> getReviewByid(@PathVariable Integer reviewId)
 	{
 		try
 		{
-			Review singlereview=reviewService.getReviewByid(id);
+			Review singlereview=reviewService.getReviewByid(reviewId);
 			return new ResponseEntity<Review>(singlereview,HttpStatus.OK);
 		}
 		catch(ReviewNotFoundException ex)
@@ -54,25 +54,54 @@ public class ReviewController {
 		}
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Review> updateReview(@PathVariable Integer id,@RequestBody Review review)
+	@PutMapping("/{reviewId}")
+	public ResponseEntity<Review> updateReview(@PathVariable Integer reviewId,@RequestBody Review review)
 	{
 		try {
 	       	  
-			 Review updatedreview = reviewService.updateReview(review,id);
+			 Review updatedreview = reviewService.updateReview(review,reviewId);
             return new ResponseEntity<>(updatedreview, HttpStatus.OK);
         } catch (ReviewNotFoundException ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         }
    }
 	
-	 @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteReview(@PathVariable Integer id) {
+	 @DeleteMapping("/{reviewId}")
+    public ResponseEntity<String> deleteReview(@PathVariable Integer reviewId) {
         try {
-        	reviewService.deleteReview(id);
-            return new ResponseEntity<>("Review deleleted with id :"+id,HttpStatus.OK);
+        	reviewService.deleteReview(reviewId);
+            return new ResponseEntity<>("Review deleleted with id :"+reviewId,HttpStatus.OK);
         } catch (ReviewNotFoundException ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         }
     }
+	 
+	 @GetMapping("/products/name/{productname}")
+	 public ResponseEntity<List<Review>> getReviewsByProductName(@PathVariable String productname) {
+		 try
+			{
+				List<Review> reviews=reviewService.getReviewsByProductName(productname);
+				return new ResponseEntity<List<Review>>(reviews,HttpStatus.OK);
+			}
+			catch(ReviewNotFoundException ex)
+			{
+				throw new RuntimeException(ex.getMessage(),ex);
+			}
+	   
+	 }
+	 
+	 @GetMapping("/products/{id}")
+	 public ResponseEntity<List<Review>> getReviewsByProduct(@PathVariable Integer id) {
+		 try
+			{
+				List<Review> reviews=reviewService.getReviewsByProduct(id);
+				return new ResponseEntity<List<Review>>(reviews,HttpStatus.OK);
+			}
+			catch(ReviewNotFoundException ex)
+			{
+				throw new RuntimeException(ex.getMessage(),ex);
+			}
+	   
+	 }
+	
 }
