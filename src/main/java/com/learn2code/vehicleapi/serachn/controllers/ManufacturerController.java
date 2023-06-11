@@ -25,7 +25,6 @@ import com.learn2code.vehicleapi.serachn.services.ManufacturerService;
 
 
 
-
 @RestController
 @RequestMapping("/api/v1/manufacturer")
 public class ManufacturerController {
@@ -66,9 +65,13 @@ public class ManufacturerController {
 	{
 		if (bindingResult.hasErrors()) {
             List<ObjectError> errors = bindingResult.getAllErrors();
-            String errorMessage = errors.get(0).getDefaultMessage();
-            return ResponseEntity.badRequest().body(errorMessage);
-        }
+            String errorMessages = "";
+            for(ObjectError err:errors)
+            {
+            	errorMessages+=err.getDefaultMessage()+"\n";
+            }
+            return ResponseEntity.badRequest().body(errorMessages);
+		}
 		 try {
        	  
 			 Manufacturer updatedmanufacturer = manufacturerService.updateManufacturer( manufacturerId,manufacturer);

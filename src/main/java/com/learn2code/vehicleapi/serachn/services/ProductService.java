@@ -2,19 +2,23 @@ package com.learn2code.vehicleapi.serachn.services;
 
 import java.util.List;
 
-import com.learn2code.vehicleapi.serachn.Entity.Product;
+import org.springframework.data.domain.Page;
+
+import com.learn2code.vehicleapi.serachn.dto.Productdto;
 
 public interface ProductService {
 
-	Product saveProduct(Product product);
+	Productdto saveProduct(Productdto productj);
 
-	List<Product> getAllProducts();
+	List<Productdto> getAllProducts();
 
-	Product getProductbyid(Integer productId);
+	Productdto getProductbyid(Integer productId);
 
-	Product updateProduct(Product product, Integer productId);
+	Productdto updateProduct(Productdto product, Integer productId);
 
 	void deleteProduct(Integer productId);
+
+	Page<Productdto> getProductsPagination(Integer pageNumber, Integer pageSize, String sort);
 
 	
 

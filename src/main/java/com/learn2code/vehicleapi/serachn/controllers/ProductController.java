@@ -3,6 +3,7 @@ package com.learn2code.vehicleapi.serachn.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.learn2code.vehicleapi.serachn.Entity.Product;
 import com.learn2code.vehicleapi.serachn.Exceptions.ProductNotFoundException;
+import com.learn2code.vehicleapi.serachn.dto.Productdto;
 import com.learn2code.vehicleapi.serachn.services.ProductService;
 
 @RestController
@@ -26,26 +27,26 @@ public class ProductController {
 	private ProductService productService;
 	
 	@PostMapping("/save")
-	public ResponseEntity<Product> saveProduct(@RequestBody Product product)
+	public ResponseEntity<Productdto> saveProduct(@RequestBody Productdto product)
 	{
-		Product savedproduct=productService.saveProduct(product);
-		return new ResponseEntity<Product>(savedproduct,HttpStatus.CREATED);
+		Productdto savedproduct=productService.saveProduct(product);
+		return new ResponseEntity<Productdto>(savedproduct,HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/getall")
-	public ResponseEntity<List<Product>> getAllProducts()
+	public ResponseEntity<List<Productdto>> getAllProducts()
 	{
-		List<Product> allproducts=productService.getAllProducts();
-		return new ResponseEntity<List<Product>>(allproducts,HttpStatus.OK);
+		List<Productdto> allproducts=productService.getAllProducts();
+		return new ResponseEntity<List<Productdto>>(allproducts,HttpStatus.OK);
 	}
 	
 	@GetMapping("/get/{productId}")
-	public ResponseEntity<Product> getProductbyid(@PathVariable Integer productId) 
+	public ResponseEntity<Productdto> getProductbyid(@PathVariable Integer productId) 
 	{
 		
 		
 	      try { 
-	    	  Product singleproduct=productService.getProductbyid(productId);
+	    	  Productdto singleproduct=productService.getProductbyid(productId);
             return new ResponseEntity<>(singleproduct, HttpStatus.OK);
             
         } catch (ProductNotFoundException ex) {
@@ -54,11 +55,11 @@ public class ProductController {
 	}
 	
 	@PutMapping("/{productId}")
-	public ResponseEntity<Product> updateProduct(@RequestBody Product product,@PathVariable Integer productId)
+	public ResponseEntity<Productdto> updateProduct(@RequestBody Productdto product,@PathVariable Integer productId)
 	{
 	try {
       	  
-		Product updateproduct=productService.updateProduct(product,productId);
+		Productdto updateproduct=productService.updateProduct(product,productId);
 		 return new ResponseEntity<>(updateproduct, HttpStatus.OK);
          
        } catch (ProductNotFoundException ex) {
@@ -75,6 +76,12 @@ public class ProductController {
          } catch (ProductNotFoundException ex) {
              throw new RuntimeException(ex.getMessage(), ex);
          }
+     }
+	 
+	 @GetMapping("/{pageNumber}/{pageSize}/{sort}")
+     public List < Productdto > getProducts(@PathVariable Integer pageNumber, @PathVariable Integer pageSize, @PathVariable String sort) {
+       Page < Productdto > data = productService.getProductsPagination(pageNumber, pageSize, sort);
+       return data.getContent();
      }
 	 
 	 

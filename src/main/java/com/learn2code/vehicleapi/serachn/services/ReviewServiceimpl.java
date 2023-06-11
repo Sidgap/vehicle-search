@@ -9,6 +9,8 @@ import com.learn2code.vehicleapi.serachn.Dao.ReviewDao;
 import com.learn2code.vehicleapi.serachn.Entity.Product;
 import com.learn2code.vehicleapi.serachn.Entity.Review;
 import com.learn2code.vehicleapi.serachn.Exceptions.ReviewNotFoundException;
+import com.learn2code.vehicleapi.serachn.converter.ProductConverter;
+import com.learn2code.vehicleapi.serachn.dto.Productdto;
 
 @Service
 public class ReviewServiceimpl implements ReviewService {
@@ -18,6 +20,9 @@ public class ReviewServiceimpl implements ReviewService {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private ProductConverter productConverter;
 	
 	@Override
 	public Review saveReview(Review review) {
@@ -59,8 +64,9 @@ public class ReviewServiceimpl implements ReviewService {
 
 	@Override
 	public List<Review> getReviewsByProduct(Integer id) {
-		 Product product = productService.getProductbyid(id);
-		 List<Review> reviews=ReviewDao.findByProduct(product);
+		 Productdto product = productService.getProductbyid(id);
+		 Product convertproduct=productConverter.convertToEntity(product);
+		 List<Review> reviews=ReviewDao.findByProduct(convertproduct);
 		 return reviews;
 	}
 
